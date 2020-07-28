@@ -3,9 +3,9 @@ import axios from 'axios';
 
 class Fib extends Component {
     state = {
-        seenIndexes = [],
-        values = {},
-        index = '',
+        seenIndexes: [],
+        values: {},
+        index: '',
     };
 
     componentDidMount() {
