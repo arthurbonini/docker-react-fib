@@ -13,9 +13,7 @@ after_sucess:
     - docker build -t arthurbonini/multi-nginx ./nginx
     - docker build -t arthurbonini/multi-server ./server
     - docker build -t arthurbonini/multi-worker ./worker
-    # LOG IN
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
-    # PUSH
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push arthurbonini/multi-client
     - docker push arthurbonini/multi-nginx
     - docker push arthurbonini/multi-server
