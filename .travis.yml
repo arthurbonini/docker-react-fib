@@ -1,0 +1,24 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t arthurbonini/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true arthurbonini/react-test npm test
+
+after_sucess:
+    - docker build -t arthurbonini/multi-client ./client
+    - docker build -t arthurbonini/multi-nginx ./nginx
+    - docker build -t arthurbonini/multi-server ./server
+    - docker build -t arthurbonini/multi-worker ./worker
+    # LOG IN
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
+    # PUSH
+    - docker push arthurbonini/multi-client
+    - docker push arthurbonini/multi-nginx
+    - docker push arthurbonini/multi-server
+    - docker push arthurbonini/multi-worker
+
+language: generic
