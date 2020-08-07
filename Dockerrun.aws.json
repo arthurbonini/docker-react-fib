@@ -11,13 +11,53 @@
             "name": "server",
             "image": "arthurbonini/multi-server",
             "hostname": "api",
-            "essential": false
+            "essential": false,
+            "environment": [
+                {
+                    "name": "REDIS_HOST",
+                    "value": "multi-docker-redis.lpntme.0001.use2.cache.amazonaws.com"
+                },
+                {
+                    "name": "REDIS_PORT",
+                    "value": "6379"
+                },
+                {
+                    "name": "PGUSER",
+                    "value": "postgres"
+                },
+                {
+                    "name": "PGHOST",
+                    "value": "multi-docker-postgres.cluvjtfoi3mi.us-east-2.rds.amazonaws.com"
+                },
+                {
+                    "name": "PGDATABASE",
+                    "value": "fibvalues"
+                },
+                {
+                    "name": "PGPASSWORD",
+                    "value": "postgrespassword"
+                },
+                {
+                    "name": "PGPORT",
+                    "value": "5432"
+                }
+            ]
         },
         {
             "name": "worker",
             "image": "arthurbonini/multi-worker",
             "hostname": "worker",
-            "essential": false
+            "essential": false,
+            "environment": [
+                {
+                    "name": "REDIS_HOST",
+                    "value": "multi-docker-redis.lpntme.0001.use2.cache.amazonaws.com"
+                },
+                {
+                    "name": "REDIS_PORT",
+                    "value": "6379"
+                }
+            ]
         },
         {
             "name": "nginx",
